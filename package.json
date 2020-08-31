@@ -1,0 +1,24 @@
+{
+  "name": "prod_kfk_cons",
+  "version": "1.0.0",
+  "description": "Develop simple producer consumer app for kafka, the first one. Ha Ha.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node producer.js",
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skulkarnibvb/prod_kfk_cons.git"
+  },
+  "author": "skulkarnibvb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skulkarnibvb/prod_kfk_cons/issues"
+  },
+  "homepage": "https://github.com/skulkarnibvb/prod_kfk_cons#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "kafka-node": "^5.0.0"
+  }
+}
