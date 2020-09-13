@@ -4,8 +4,7 @@ From <https://github.com/bitnami/bitnami-docker-zookeeper/issues/22>
 docker exec -it <container name> /bin/bash
 ---
 - docker-compose up
-- docker-compose exec broker kafka-topics --create --bootstrap-server \
-	localhost:29092 --replication-factor 1 --partitions 1 --topic kafka-example-topic
+- docker-compose exec broker kafka-topics --create --bootstrap-server localhost:29092 --replication-factor 1 --partitions 1 --topic kafka-example-topic
 
 From <https://docs.confluent.io/current/quickstart/cos-docker-quickstart.html> 
 
@@ -29,3 +28,31 @@ kafka-console-producer.sh --broker-list host.docker.internal:9092 --topic kafka-
 // consume from topic
 kafka-console-consumer.sh --bootstrap-server host.docker.internal:9092 --topic kafka-example-topic --from-beginning
 ---
+ksql commands;
+---
+to delete ctas: terminate <name>
+to create ctas: create table <name> with(partitions=2) as select * from <table_name> emit changes;
+to create table: CREATE TABLE <table_name> (messageId varchar primary key, status varchar, type varchar) with (kafka_topic=<topic>, value_format='JSON');
+-----------------------------------------------------------------------------------------
+run cassandra: cassandra
+run cli: cqlsh
+import keyspace: source 'cql file path'
+------------------------------------------------------------------------------------------
+Nifi - details;
+
+kafka consumer processor -> ConsumerKafka_1_0
+config details;
+kafka brokers: list of known/running broker/kafka host:port (broker:29092,localhost:29092)
+sec protocol: PLAINTEXT
+provide topic name, group id (anything), attribute encoding (utf8)
+Under settings tab: automatically terminate relationships
+
+cassandra updater -> PutCassandraRecord
+Under Settings: automatically terminate relationships
+Under properties;
+cassandra contact points: where db is running (localhost:9042)
+provide keyspace, table names
+statement type: insert/whatever is the requirement
+- create a recordreader: (in my case i created a JsonTreeReader)
+
+Join the flow between the processors

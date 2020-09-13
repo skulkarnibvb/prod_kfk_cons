@@ -10,7 +10,7 @@ const producer = new Producer(client,  {requireAcks: 0, partitionerType: 2});
 const pushDataToKafka =(dataToPush) => {
 
   try {
-  let payloadToKafkaTopic = [{topic: "kafka-example-topic", messages: JSON.stringify(dataToPush) }];
+  let payloadToKafkaTopic = [{topic: "deadend", messages: JSON.stringify(dataToPush) }];
   console.log(payloadToKafkaTopic);
   producer.on('ready', async function() {
     producer.send(payloadToKafkaTopic, (err, data) => {
